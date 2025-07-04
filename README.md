@@ -1,10 +1,18 @@
+Login page
 ![image](https://github.com/user-attachments/assets/324470f2-d92f-4f61-a153-8397d0ae8418)
+Register page
 ![image](https://github.com/user-attachments/assets/fd148764-a4f6-4646-850b-a33f172dadc7)
+Dashboard Mahasiswa
 ![image](https://github.com/user-attachments/assets/84489618-1b19-4c65-910c-a105ff92946d)
+Praktikum Saya
 ![image](https://github.com/user-attachments/assets/bb3ac09c-f1b6-4314-a724-92825121f2e1)
+
 ![image](https://github.com/user-attachments/assets/29a21fa7-35a1-4bf9-885c-9a8a5509a9cc)
+
 ![image](https://github.com/user-attachments/assets/963f565d-d88a-4d5b-93ca-e424573d3012)
+
 ![image](https://github.com/user-attachments/assets/adceb891-c84a-4e71-9f3d-8a0db2ddc714)
+
 ![image](https://github.com/user-attachments/assets/efd1fae7-6a26-4985-9de9-4f93381118c9)
 
 ![image](https://github.com/user-attachments/assets/ca367c58-7252-4a3b-b914-427ab64738bd)
