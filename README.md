@@ -41,4 +41,5 @@ Tambah Modul
 Ini desain Pop up saat kita menghapus, semua desain sama saja di Akun, Praktikum, dan Modul seperti ini
 ![image](https://github.com/user-attachments/assets/9f85e35f-0cc6-400f-8ba3-1f3480c00d6b)
 ![image](https://github.com/user-attachments/assets/a66172fe-6014-49aa-a519-35d16d7ec7c8)
+Dan ini desain Pop up saat menambahkan, semua desain sama saja di Akun, Praktikum, dan modul seperti ini
 ![image](https://github.com/user-attachments/assets/ad583ba7-6ec7-47c5-a844-52232ee462ec)
