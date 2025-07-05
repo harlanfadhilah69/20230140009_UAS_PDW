@@ -13,14 +13,11 @@ if (!$id_praktikum) {
 $stmt_praktikum = $conn->prepare("SELECT nama FROM mata_praktikum WHERE id = ?");
 $stmt_praktikum->bind_param("i", $id_praktikum);
 $stmt_praktikum->execute();
-$result_praktikum = $stmt_praktikum->get_result();
-$praktikum = $result_praktikum->fetch_assoc();
+$praktikum = $stmt_praktikum->get_result()->fetch_assoc();
 $nama_praktikum = $praktikum['nama'] ?? 'Tidak Ditemukan';
+$stmt_praktikum->close();
 
-$stmt_modul = $conn->prepare("SELECT * FROM modul WHERE id_praktikum = ? ORDER BY created_at ASC");
-$stmt_modul->bind_param("i", $id_praktikum);
-$stmt_modul->execute();
-$result_modul = $stmt_modul->get_result();
+$result_modul = $conn->query("SELECT * FROM modul WHERE id_praktikum = $id_praktikum ORDER BY created_at ASC");
 ?>
 
 <div class="flex justify-between items-center mb-6">
@@ -29,7 +26,7 @@ $result_modul = $stmt_modul->get_result();
         <p class="text-sm text-gray-500 dark:text-gray-400">Kelola materi pertemuan untuk praktikum ini.</p>
     </div>
     <div class="flex items-center space-x-4">
-         <a href="manajemen_praktikum.php" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">&larr; Kembali</a>
+        <a href="manajemen_praktikum.php" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">&larr; Kembali</a>
         <a href="modul_tambah.php?id_praktikum=<?php echo $id_praktikum; ?>" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
             <span>Tambah Modul</span>
@@ -57,7 +54,7 @@ $result_modul = $stmt_modul->get_result();
                     </div>
                     <div class="flex items-center space-x-2">
                         <a href="modul_edit.php?id=<?php echo $modul['id']; ?>" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-lg">Edit</a>
-                        <a href="modul_hapus.php?id=<?php echo $modul['id']; ?>" class="text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg" onclick="return confirm('Yakin ingin menghapus modul ini?');">Hapus</a>
+                        <a href="modul_hapus.php?id=<?php echo $modul['id']; ?>" class="delete-btn text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Hapus</a>
                     </div>
                 </li>
             <?php endwhile; ?>
@@ -71,8 +68,6 @@ $result_modul = $stmt_modul->get_result();
 </div>
 
 <?php
-$stmt_praktikum->close();
-$stmt_modul->close();
 $conn->close();
 require_once 'templates/footer.php';
 ?>

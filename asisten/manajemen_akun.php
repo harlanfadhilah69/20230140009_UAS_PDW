@@ -4,20 +4,15 @@ $activePage = 'manajemen_akun';
 require_once 'templates/header.php';
 require_once '../config.php';
 
-// Ambil semua pengguna dari database, kecuali admin yang sedang login untuk sementara
 $current_admin_id = $_SESSION['user_id'];
 $result = $conn->query("SELECT id, nama, email, role FROM users ORDER BY nama ASC");
 ?>
 
 <div class="flex justify-between items-center mb-6">
-     <div>
-        <?php if(isset($_GET['status'])): ?>
+    <div>
+        <?php if(isset($_GET['status']) && strpos($_GET['status'], '_sukses') !== false): ?>
             <span class="text-sm text-green-600 dark:text-green-400">
-                <?php 
-                    if($_GET['status'] == 'tambah_sukses') echo 'Akun baru berhasil dibuat!';
-                    if($_GET['status'] == 'edit_sukses') echo 'Data akun berhasil diperbarui!';
-                    if($_GET['status'] == 'hapus_sukses') echo 'Akun berhasil dihapus!';
-                ?>
+                Aksi terakhir berhasil dieksekusi!
             </span>
         <?php endif; ?>
     </div>
@@ -49,8 +44,8 @@ $result = $conn->query("SELECT id, nama, email, role FROM users ORDER BY nama AS
                     </span>
                     <div class="flex items-center space-x-2">
                          <a href="akun_edit.php?id=<?php echo $user['id']; ?>" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Edit</a>
-                        <?php if ($current_admin_id != $user['id']): // Cegah admin menghapus dirinya sendiri ?>
-                            <a href="akun_hapus.php?id=<?php echo $user['id']; ?>" class="text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors" onclick="return confirm('Yakin ingin menghapus akun ini?');">Hapus</a>
+                        <?php if ($current_admin_id != $user['id']): ?>
+                            <a href="akun_hapus.php?id=<?php echo $user['id']; ?>" class="delete-btn text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Hapus</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -61,5 +56,24 @@ $result = $conn->query("SELECT id, nama, email, role FROM users ORDER BY nama AS
 
 <?php
 $conn->close();
+?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('status') === 'hapus_sukses') {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Data akun telah berhasil dihapus.',
+            icon: 'success',
+            timer: 2000, // Notifikasi hilang setelah 2 detik
+            showConfirmButton: false,
+            background: document.body.classList.contains('dark') ? '#1f2937' : '#fff',
+            color: document.body.classList.contains('dark') ? '#e5e7eb' : '#1f2937'
+        });
+    }
+});
+</script>
+<?php
 require_once 'templates/footer.php';
 ?>

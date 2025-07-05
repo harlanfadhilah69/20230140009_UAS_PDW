@@ -68,7 +68,7 @@ $conn->close();
             </div>
 
             <div class="bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-8 space-y-6">
-                <h3 class="text-center text-2xl font-bold text-gray-900">Mulai Perjalananmu!</h3>
+                <h3 class="text-center text-2xl font-bold text-gray-900">Mulai Daftar!</h3>
 
                 <?php if (!empty($message)): ?>
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">

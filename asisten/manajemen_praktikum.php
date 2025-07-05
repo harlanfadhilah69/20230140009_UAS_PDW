@@ -1,25 +1,16 @@
 <?php
 $pageTitle = 'Manajemen Praktikum';
-$activePage = 'manajemen_praktikum';
+$activePage = 'Praktikum';
 require_once 'templates/header.php';
 require_once '../config.php';
 
-// Ambil semua data praktikum dari database
+// Ambil semua data praktikum untuk ditampilkan
 $result = $conn->query("SELECT * FROM mata_praktikum ORDER BY nama ASC");
 ?>
 
 <div class="flex justify-between items-center mb-6">
     <div>
-        <?php if(isset($_GET['status'])): ?>
-            <span class="text-sm text-green-600 dark:text-green-400">
-                <?php 
-                    if($_GET['status'] == 'tambah_sukses') echo 'Praktikum baru berhasil ditambahkan!';
-                    if($_GET['status'] == 'edit_sukses') echo 'Data praktikum berhasil diperbarui!';
-                    if($_GET['status'] == 'hapus_sukses') echo 'Praktikum berhasil dihapus!';
-                ?>
-            </span>
-        <?php endif; ?>
-    </div>
+        </div>
     <a href="praktikum_tambah.php" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-lg">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
         <span>Tambah Praktikum</span>
@@ -30,14 +21,14 @@ $result = $conn->query("SELECT * FROM mata_praktikum ORDER BY nama ASC");
     <?php if ($result->num_rows > 0): ?>
         <?php while($row = $result->fetch_assoc()): ?>
             <?php
-                // Hitung jumlah modul untuk praktikum ini
+                // Hitung jumlah modul
                 $stmt_modul = $conn->prepare("SELECT COUNT(*) as total FROM modul WHERE id_praktikum = ?");
                 $stmt_modul->bind_param("i", $row['id']);
                 $stmt_modul->execute();
                 $count_modul = $stmt_modul->get_result()->fetch_assoc()['total'];
                 $stmt_modul->close();
 
-                // Hitung jumlah mahasiswa terdaftar untuk praktikum ini
+                // Hitung jumlah mahasiswa
                 $stmt_mahasiswa = $conn->prepare("SELECT COUNT(*) as total FROM pendaftaran WHERE id_praktikum = ?");
                 $stmt_mahasiswa->bind_param("i", $row['id']);
                 $stmt_mahasiswa->execute();
@@ -66,16 +57,12 @@ $result = $conn->query("SELECT * FROM mata_praktikum ORDER BY nama ASC");
                 <div class="p-4 bg-gray-50 dark:bg-gray-800/50 border-t dark:border-gray-700 flex justify-end space-x-2">
                     <a href="modul.php?id_praktikum=<?php echo $row['id']; ?>" class="text-sm bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Modul</a>
                     <a href="praktikum_edit.php?id=<?php echo $row['id']; ?>" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Edit</a>
-                    <a href="praktikum_hapus.php?id=<?php echo $row['id']; ?>" class="text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors" onclick="return confirm('Menghapus praktikum akan menghapus semua modul dan laporan terkait. Yakin?');">Hapus</a>
+                    <a href="praktikum_hapus.php?id=<?php echo $row['id']; ?>" class="delete-btn text-sm bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">Hapus</a>
                 </div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
-        <div class="col-span-full text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-             <h3 class="mt-2 text-lg font-medium text-gray-900 dark:text-white">Belum Ada Praktikum</h3>
-             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Silakan tambahkan mata praktikum baru untuk memulai.</p>
-        </div>
+        <p class="col-span-full text-center text-gray-500 dark:text-gray-400 py-10">Belum ada praktikum.</p>
     <?php endif; ?>
 </div>
 
