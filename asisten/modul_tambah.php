@@ -75,7 +75,7 @@ require_once 'templates/header.php';
             <input type="file" id="file_materi" name="file_materi" class="mt-1 block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-100 dark:file:bg-gray-600 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-gray-200 dark:hover:file:bg-gray-500">
         </div>
         <div class="flex justify-end pt-2">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg">Simpan Modul</button>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg">Buat Modul</button>
         </div>
     </form>
 </div>

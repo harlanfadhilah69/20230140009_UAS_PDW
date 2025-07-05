@@ -84,7 +84,7 @@ require_once 'templates/header.php';
         </div>
         <div class="flex items-center justify-end">
             <button type="submit" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all">
-                Simpan Nilai
+                Kirim Nilai
             </button>
         </div>
     </form>

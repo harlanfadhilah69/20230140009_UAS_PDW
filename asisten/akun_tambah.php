@@ -94,7 +94,7 @@ require_once 'templates/header.php';
         </div>
         <div class="flex justify-end pt-2">
             <button type="submit" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md">
-                Simpan Akun
+                Buat Akun
             </button>
         </div>
     </form>
